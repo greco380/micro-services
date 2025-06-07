@@ -80,6 +80,24 @@ This project demonstrates several key architectural patterns:
 - **Circuit Breaker**: Fault tolerance and resilience
 - **Saga Pattern**: Distributed transaction management
 
+## 🎯 Interactive Dashboard
+
+**NEW!** Experience all microservices through our beautiful web dashboard:
+
+```bash
+cd dashboard
+npm install
+npm run dev
+```
+
+The dashboard provides:
+- **Interactive interfaces** for file uploads, URL shortening, data conversion, and more
+- **Visual demos** of load balancing, caching, and distributed system concepts
+- **Real-time feedback** and working examples of each service
+- **Modern UI** built with Next.js, TypeScript, and Tailwind CSS
+
+Visit [http://localhost:3000](http://localhost:3000) to explore all services visually!
+
 ## 🚦 Getting Started
 
 ### Prerequisites
@@ -88,6 +106,21 @@ This project demonstrates several key architectural patterns:
 - PostgreSQL and Redis instances
 
 ### Quick Start
+
+#### Option 1: Interactive Dashboard (Recommended for Learning)
+```bash
+# Clone the repository
+git clone <repository-url>
+cd micro-services/dashboard
+
+# Install dependencies and start dashboard
+npm install
+npm run dev
+
+# Open http://localhost:3000 in your browser
+```
+
+#### Option 2: Traditional Service Setup
 ```bash
 # Clone the repository
 git clone <repository-url>
