@@ -49,21 +49,15 @@ A secure and scalable file upload service with support for multiple storage back
 - Implements clean architecture with storage abstraction
 - Uses worker queues for CPU-intensive operations
 - Supports file deduplication to save storage
-- Includes comprehensive audit logging
+- Includes comprehensive audit logging 
 
-## Running with Docker Compose
+## Docker Usage
 
-From the repository root you can build and start the service using Docker Compose:
+To build and run the Node.js uploader service with Docker:
 
 ```bash
-# build the container
-docker compose build file-uploader
-
-# start just the file uploader
-docker compose up file-uploader
-
-# or start it together with the dashboard
-docker compose up file-uploader dashboard
+docker build -t file-uploader .
+docker run -p 4000:4000 file-uploader
 ```
 
-The API listens on [http://localhost:4000](http://localhost:4000). When using the dashboard at [http://localhost:3000](http://localhost:3000), wait for the upload progress bar to hit 100% and the file preview will appear below the progress bar.
+The server listens on port `4000` by default and stores uploaded files inside the `server/uploads` directory which is exposed at `/uploads`.
