@@ -135,6 +135,23 @@ npm install
 npm start
 ```
 
+#### Option 3: Docker Compose
+Spin up the File Uploader service and, optionally, the dashboard with one command.
+
+```bash
+# Build the containers (first time only)
+docker compose build file-uploader dashboard
+
+# Start only the File Uploader service
+docker compose up file-uploader
+
+# Or start both services together
+docker compose up file-uploader dashboard
+```
+
+The File Uploader will be available at [http://localhost:4000](http://localhost:4000).
+If you also run the dashboard, open [http://localhost:3000](http://localhost:3000) to upload a file. After the progress bar reaches 100%, a preview of the uploaded file appears below the bar.
+
 ### Development Workflow
 1. Choose a service to work on
 2. Read the service-specific README
