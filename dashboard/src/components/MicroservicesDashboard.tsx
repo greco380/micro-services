@@ -12,6 +12,7 @@ import {
 const MicroservicesDashboard = () => {
   const [selectedService, setSelectedService] = useState<string | null>(null);
   const [uploadedFile, setUploadedFile] = useState<any>(null);
+  const [uploadProgress, setUploadProgress] = useState(0);
   const [markdownText, setMarkdownText] = useState('# Hello World\n\nThis is **bold** text and this is *italic* text.\n\n## Lists\n- Item 1\n- Item 2\n- Item 3');
   const [convertedHtml, setConvertedHtml] = useState('');
   const [shortUrl, setShortUrl] = useState('');
@@ -158,23 +159,56 @@ const MicroservicesDashboard = () => {
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setUploadedFile({
-          name: file.name,
-          size: file.size,
-          type: file.type,
-          content: e.target?.result
-        });
-      };
-      
-      if (file.type.startsWith('text/') || file.type === 'application/json') {
-        reader.readAsText(file);
-      } else {
-        reader.readAsDataURL(file);
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'http://localhost:4000/upload');
+
+    setUploadProgress(0);
+
+    xhr.upload.onprogress = (e) => {
+      if (e.lengthComputable) {
+        setUploadProgress(Math.round((e.loaded / e.total) * 100));
       }
-    }
+    };
+
+    xhr.onload = () => {
+      if (xhr.status === 200) {
+        setUploadProgress(100);
+        try {
+          const response = JSON.parse(xhr.responseText);
+          const url = response.url;
+
+          if (file.type.startsWith('text/') || file.type === 'application/json') {
+            fetch(url)
+              .then(res => res.text())
+              .then(text => {
+                setUploadedFile({
+                  name: file.name,
+                  size: file.size,
+                  type: file.type,
+                  url,
+                  content: text
+                });
+              });
+          } else {
+            setUploadedFile({
+              name: file.name,
+              size: file.size,
+              type: file.type,
+              url
+            });
+          }
+        } catch (err) {
+          console.error(err);
+        }
+      }
+    };
+
+    xhr.send(formData);
   };
 
   const renderServiceModal = () => {
@@ -205,6 +239,7 @@ const MicroservicesDashboard = () => {
             {selectedService === 'file-uploader' && (
               <div className="space-y-4">
                 <h3 className="text-lg font-semibold">Upload File</h3>
+                <p>Please select the file you would like to upload.</p>
                 <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
                   <Upload className="h-12 w-12 text-gray-400 mx-auto mb-4" />
                   <input
@@ -212,6 +247,9 @@ const MicroservicesDashboard = () => {
                     onChange={handleFileUpload}
                     className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
                   />
+                  {uploadProgress > 0 && uploadProgress < 100 && (
+                    <progress value={uploadProgress} max="100" className="w-full mt-4"></progress>
+                  )}
                 </div>
                 
                 {uploadedFile && (
@@ -224,7 +262,7 @@ const MicroservicesDashboard = () => {
                     </div>
                     <div className="mt-3 p-3 bg-white rounded border max-h-40 overflow-y-auto">
                       {uploadedFile.type?.startsWith('image/') ? (
-                        <img src={uploadedFile.content} alt={uploadedFile.name} className="max-w-full h-auto" />
+                        <img src={uploadedFile.url} alt={uploadedFile.name} className="max-w-full h-auto" />
                       ) : (
                         <pre className="text-xs whitespace-pre-wrap">{uploadedFile.content}</pre>
                       )}
