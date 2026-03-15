@@ -1,0 +1,46 @@
+[
+  {
+    "name": "Local Lead-Capture Widget + CRM Alerts",
+    "setup_cost_eur": 100,
+    "monthly_operating_cost_eur": 20,
+    "estimated_price_eur": 39,
+    "estimated_customers": 15,
+    "estimated_hours_per_month": 8,
+    "reliability_score": 7.5,
+    "legal_complexity_score": 3,
+    "competition_score": 6
+  },
+  {
+    "name": "Appointment Reminder Automation for Clinics",
+    "setup_cost_eur": 100,
+    "monthly_operating_cost_eur": 35,
+    "estimated_price_eur": 49,
+    "estimated_customers": 10,
+    "estimated_hours_per_month": 10,
+    "reliability_score": 8.2,
+    "legal_complexity_score": 5,
+    "competition_score": 7
+  },
+  {
+    "name": "Niche SEO Rank Tracking Dashboard",
+    "setup_cost_eur": 100,
+    "monthly_operating_cost_eur": 45,
+    "estimated_price_eur": 29,
+    "estimated_customers": 20,
+    "estimated_hours_per_month": 12,
+    "reliability_score": 6.8,
+    "legal_complexity_score": 2,
+    "competition_score": 8
+  },
+  {
+    "name": "Invoice Follow-up and Payment Nudges",
+    "setup_cost_eur": 100,
+    "monthly_operating_cost_eur": 25,
+    "estimated_price_eur": 45,
+    "estimated_customers": 12,
+    "estimated_hours_per_month": 6,
+    "reliability_score": 8.7,
+    "legal_complexity_score": 4,
+    "competition_score": 5
+  }
+]
