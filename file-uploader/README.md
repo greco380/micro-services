@@ -50,3 +50,14 @@ A secure and scalable file upload service with support for multiple storage back
 - Uses worker queues for CPU-intensive operations
 - Supports file deduplication to save storage
 - Includes comprehensive audit logging 
+
+## Docker Usage
+
+To build and run the Node.js uploader service with Docker:
+
+```bash
+docker build -t file-uploader .
+docker run -p 4000:4000 file-uploader
+```
+
+The server listens on port `4000` by default and stores uploaded files inside the `server/uploads` directory which is exposed at `/uploads`.

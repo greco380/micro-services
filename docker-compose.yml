@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  file-uploader:
+    image: file-uploader:latest
+    build: ./file-uploader
+    ports:
+      - "4000:4000"
+
+  dashboard:
+    image: dashboard:latest
+    build: ./dashboard
+    ports:
+      - "3000:3000"
+    depends_on:
+      - file-uploader
+
