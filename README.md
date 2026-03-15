@@ -1,6 +1,6 @@
 # Microservices Learning Project
 
-A comprehensive collection of 24 microservices designed to showcase various aspects of modern software development, system design, and distributed computing. Each service demonstrates specific technical skills and architectural patterns commonly used in enterprise applications.
+A comprehensive collection of 25 microservices designed to showcase various aspects of modern software development, system design, and distributed computing. Each service demonstrates specific technical skills and architectural patterns commonly used in enterprise applications.
 
 ## 🚀 Project Overview
 
@@ -47,6 +47,7 @@ This project serves as a hands-on learning platform for understanding microservi
 
 ### AI & Analytics
 - **[YouTube Content Analyzer](./youtube-content-analyzer/)** - API integration and content analysis
+- **[Recurring Income Planner](./recurring-income-planner/)** - Assumptions-based scoring for micro-SaaS opportunity selection
 
 ## 🛠 Technology Stack
 
